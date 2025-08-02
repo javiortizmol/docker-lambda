@@ -28,15 +28,27 @@ cd runtimes/0-provided.al2-x86_64/2-build
 ./build.sh
 cd ../../..
 
-# Step 5: Build the Python runtime image
-echo "Step 5: Building Python runtime image..."
-cd runtimes/1-python3.12-x86_64/1-run
+# Step 5: Build the Python 3.11 runtime image
+echo "Step 5: Building Python 3.11 runtime image..."
+cd runtimes/1-python3.11-x86_64/1-run
 ./build.sh
 cd ../../..
 
-# Step 6: Build the Python runtime build image
-echo "Step 6: Building Python runtime build image..."
-cd runtimes/1-python3.12-x86_64/2-build
+# Step 6: Build the Python 3.11 runtime build image
+echo "Step 6: Building Python 3.11 runtime build image..."
+cd runtimes/1-python3.11-x86_64/2-build
+./build.sh
+cd ../../..
+
+# Step 7: Build the Python 3.12 runtime image
+echo "Step 7: Building Python 3.12 runtime image..."
+cd runtimes/2-python3.12-x86_64/1-run
+./build.sh
+cd ../../..
+
+# Step 8: Build the Python 3.12 runtime build image
+echo "Step 8: Building Python 3.12 runtime build image..."
+cd runtimes/2-python3.12-x86_64/2-build
 ./build.sh
 cd ../../..
 

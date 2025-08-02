@@ -20,13 +20,21 @@ docker push javiortizmol/docker-lambda:provided.al2-x86_64
 echo "Step 4: Pushing provided runtime build image..."
 docker push javiortizmol/docker-lambda:provided.al2-build-x86_64
 
-# Step 5: Push the Python runtime image
-echo "Step 5: Pushing Python runtime image..."
+# Step 5: Push the Python 3.11 runtime image
+echo "Step 5: Pushing Python 3.11 runtime image..."
 docker push javiortizmol/docker-lambda:python3.11-x86_64
 
-# Step 6: Push the Python runtime build image
-echo "Step 6: Pushing Python runtime build image..."
+# Step 6: Push the Python 3.11 runtime build image
+echo "Step 6: Pushing Python 3.11 runtime build image..."
 docker push javiortizmol/docker-lambda:python3.11-build-x86_64
+
+# Step 7: Push the Python 3.12 runtime image
+echo "Step 7: Pushing Python 3.12 runtime image..."
+docker push javiortizmol/docker-lambda:python3.12-x86_64
+
+# Step 8: Push the Python 3.12 runtime build image
+echo "Step 8: Pushing Python 3.12 runtime build image..."
+docker push javiortizmol/docker-lambda:python3.12-build-x86_64
 
 echo "All images pushed successfully!"
 echo ""
@@ -37,4 +45,6 @@ echo "- javiortizmol/docker-lambda:base-x86_64"
 echo "- javiortizmol/docker-lambda:provided.al2-x86_64"
 echo "- javiortizmol/docker-lambda:provided.al2-build-x86_64"
 echo "- javiortizmol/docker-lambda:python3.11-x86_64"
-echo "- javiortizmol/docker-lambda:python3.11-build-x86_64" 
+echo "- javiortizmol/docker-lambda:python3.11-build-x86_64"
+echo "- javiortizmol/docker-lambda:python3.12-x86_64"
+echo "- javiortizmol/docker-lambda:python3.12-build-x86_64" 
