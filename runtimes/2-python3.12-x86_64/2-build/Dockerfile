@@ -8,13 +8,35 @@ ENV PATH=/var/lang/bin:$PATH \
   PIPX_BIN_DIR=/var/lang/bin \
   PIPX_HOME=/var/lang/pipx
 
-# Install Python 3.11 (since 3.12 is not available in docker-lambda S3 bucket yet)
-RUN curl https://docker-lambda.s3.amazonaws.com/fs/python3.11-x86_64.tgz | tar -zx -C /opt && \
-    ln -sf /opt/var/lang/bin/python3.11 /opt/var/lang/bin/python3 && \
-    ln -sf /opt/var/lang/bin/pip3.11 /opt/var/lang/bin/pip3
+# Build Python 3.12 from source
+RUN yum install -y \
+    gcc \
+    gcc-c++ \
+    make \
+    openssl-devel \
+    openssl \
+    bzip2-devel \
+    libffi-devel \
+    zlib-devel \
+    readline-devel \
+    sqlite-devel \
+    wget \
+    ca-certificates
 
-# Copy Python installation to /var/lang
-RUN cp -r /opt/var/lang /var/lang
+# Download and build Python 3.12
+WORKDIR /tmp
+RUN wget https://www.python.org/ftp/python/3.12.0/Python-3.12.0.tgz && \
+    tar -xzf Python-3.12.0.tgz && \
+    cd Python-3.12.0 && \
+    ./configure --prefix=/var/lang --enable-optimizations --with-ensurepip=install --with-openssl=/usr && \
+    make -j$(nproc) && \
+    make install && \
+    cd .. && \
+    rm -rf Python-3.12.0 Python-3.12.0.tgz
+
+# Create symlinks
+RUN ln -sf /var/lang/bin/python3.12 /var/lang/bin/python3 && \
+    ln -sf /var/lang/bin/pip3.12 /var/lang/bin/pip3
 
 # Add these as a separate layer as they get updated frequently
 RUN pip3 install -U pip setuptools wheel --no-cache-dir && \
