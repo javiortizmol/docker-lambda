@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 export PUBLISH_DATE=$(date "+%Y%m%d%H%M")
-export NO_ARCH_TAG="mlupin/docker-lambda:provided.al2-build"
+export NO_ARCH_TAG="javiortizmol/docker-lambda:provided.al2-build"
 export BASE_IMAGE="${NO_ARCH_TAG}-x86_64"
 
 docker tag ${BASE_IMAGE} ${BASE_IMAGE}-${PUBLISH_DATE}
