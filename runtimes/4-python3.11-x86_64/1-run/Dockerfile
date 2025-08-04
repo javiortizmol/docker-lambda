@@ -1,8 +1,4 @@
-FROM amazonlinux:2
-
-RUN yum install -y tar gzip
-
-RUN curl https://docker-lambda.s3.amazonaws.com/fs/python3.11-x86_64.tgz | tar -zx -C /opt
+FROM public.ecr.aws/lambda/python:3.11
 
 FROM javiortizmol/docker-lambda:provided.al2-x86_64
 FROM javiortizmol/docker-lambda:base-x86_64
@@ -12,10 +8,11 @@ ENV PATH=/var/lang/bin:$PATH \
     AWS_EXECUTION_ENV=AWS_Lambda_python3.11 \
     AWS_EXECUTION_ARCH=x86_64
 
-COPY --from=0 /opt/* /var/
+# Copy Python installation from AWS Lambda image
+COPY --from=0 /var/lang /var/lang
 
 COPY --from=1 /var/runtime/init /var/rapid/init
 
 USER sbx_user1051
 
-ENTRYPOINT ["/var/rapid/init", "--bootstrap", "/var/runtime/bootstrap", "--enable-msg-logs"]
+ENTRYPOINT ["/var/rapid/init", "--bootstrap", "/var/runtime/bootstrap", "--enable-msg-logs"] 

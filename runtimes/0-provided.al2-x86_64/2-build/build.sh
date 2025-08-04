@@ -2,4 +2,6 @@
 
 set -euxo pipefail
 
-docker build -t javiortizmol/docker-lambda:provided.al2-build-x86_64 .
+DOCKER_OS_ARCHITECTURE="linux/amd64"
+
+docker build --platform $DOCKER_OS_ARCHITECTURE -t javiortizmol/docker-lambda:provided.al2-build-x86_64 .
